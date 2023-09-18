@@ -4,6 +4,8 @@
 #define DATA
 
 #include <Esp.h>
+
+#include <initializer_list>
 #include <vector>
 
 /*
@@ -96,6 +98,11 @@ public:
     配列型の値を持つデータを構築します。
   */
   Data(std::vector<Data>&&);
+
+  /*
+    配列型の値を持つデータを構築します。
+  */
+  Data(std::initializer_list<Data>);
 
   /*
     bool型の値を持つデータを構築します。

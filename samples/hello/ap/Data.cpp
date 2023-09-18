@@ -1,3 +1,4 @@
+#include <initializer_list>
 #include "Data.hpp"
 
 Data::Data(const String& str)
@@ -13,6 +14,9 @@ Data::Data(const std::vector<Data>& array)
   : _type(DataType::Array), _data{ ._array = new std::vector<Data>(array) } {}
 
 Data::Data(std::vector<Data>&& array)
+  : _type(DataType::Array), _data{ ._array = new std::vector<Data>(array) } {}
+
+Data::Data(std::initializer_list<Data> array)
   : _type(DataType::Array), _data{ ._array = new std::vector<Data>(array) } {}
 
 Data::Data(const Data& other)
@@ -36,40 +40,40 @@ Data::Data(Data&& other)
 }
 
 Data::~Data() {
-  if (_type == DataType::String)      // 現在のデータが文字列型のとき
-    delete _data._str;                // 文字列のメモリを解放
-  else if (_type == DataType::Array)  // 現在のデータが配列のとき
-    delete _data._array;              // 配列のメモリを解放
+  if (_type == DataType::String)
+    delete _data._str;
+  else if (_type == DataType::Array)
+    delete _data._array;
 }
 
 Data& Data::operator=(const Data& other) {
-  if (_type == DataType::String)                                // 現在のデータが文字列型のとき
-    delete _data._str;                                          // 文字列のメモリを解放
-  else if (_type == DataType::Array)                            // 現在のデータが配列のとき
-    delete _data._array;                                        // 配列のメモリを解放
-  _type = other._type;                                          // データ型を変更
-  if (other._type == DataType::String)                          // 新しいデータが文字列型の場合
-    _data._str = new String(*other._data._str);                 // メモリを確保してコピー
-  else if (other._type == DataType::Array)                      // 新しいデータが配列型の場合
-    _data._array = new std::vector<Data>(*other._data._array);  // メモリを確保してコピー
-  else                                                          // 新しいデータがそれ以外の型の場合
-    _data = other._data;                                        // 値をコピー
-  return *this;                                                 // このオブジェクトの参照を返す
+  if (_type == DataType::String)
+    delete _data._str;
+  else if (_type == DataType::Array)
+    delete _data._array;
+  _type = other._type;
+  if (other._type == DataType::String)
+    _data._str = new String(*other._data._str);
+  else if (other._type == DataType::Array)
+    _data._array = new std::vector<Data>(*other._data._array);
+  else
+    _data = other._data;
+  return *this;
 }
 
 Data& Data::operator=(Data&& other) {
-  if (_type == DataType::String)                                           // 現在のデータが文字列型のとき
-    delete _data._str;                                                     // 文字列のメモリを解放
-  else if (_type == DataType::Array)                                       // 現在のデータが配列のとき
-    delete _data._array;                                                   // 配列のメモリを解放
-  _type = other._type;                                                     // データ型を変更
-  if (other._type == DataType::String)                                     // 新しいデータが文字列型の場合
-    _data._str = new String(std::move(*other._data._str));                 // メモリを確保してコピー
-  else if (other._type == DataType::Array)                                 // 新しいデータが配列型の場合
-    _data._array = new std::vector<Data>(std::move(*other._data._array));  // メモリを確保してコピー
-  else                                                                     // 新しいデータがそれ以外の型の場合
-    _data = other._data;                                                   // 値をコピー
-  return *this;                                                            // このオブジェクトの参照を返す
+  if (_type == DataType::String)
+    delete _data._str;
+  else if (_type == DataType::Array)
+    delete _data._array;
+  _type = other._type;
+  if (other._type == DataType::String)
+    _data._str = new String(std::move(*other._data._str));
+  else if (other._type == DataType::Array)
+    _data._array = new std::vector<Data>(std::move(*other._data._array));
+  else
+    _data = other._data;
+  return *this;
 }
 
 bool Data::operator==(const Data& other) const {

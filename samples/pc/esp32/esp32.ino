@@ -64,7 +64,7 @@ void loop() {
     Serial.print(ary[3] ? "true" : "false");
     Serial.println(']');
   }
-  wlTxWrite(std::vector<Data>{ b1, b2, b3, b4 }, 3);
+  wlTxWrite({ b1, b2, b3, b4 }, 3);
   Serial.print("sent (ch3): [");
   Serial.print(b1 ? "true" : "false");
   Serial.print(", ");

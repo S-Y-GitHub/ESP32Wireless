@@ -1,3 +1,4 @@
+#include <initializer_list>
 #include "Data.hpp"
 
 Data::Data(const String& str)
@@ -13,6 +14,9 @@ Data::Data(const std::vector<Data>& array)
   : _type(DataType::Array), _data{ ._array = new std::vector<Data>(array) } {}
 
 Data::Data(std::vector<Data>&& array)
+  : _type(DataType::Array), _data{ ._array = new std::vector<Data>(array) } {}
+
+Data::Data(std::initializer_list<Data> array)
   : _type(DataType::Array), _data{ ._array = new std::vector<Data>(array) } {}
 
 Data::Data(const Data& other)

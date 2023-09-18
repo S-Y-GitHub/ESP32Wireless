@@ -4,6 +4,8 @@
 #define DATA
 
 #include <Esp.h>
+
+#include <initializer_list>
 #include <vector>
 
 /*
@@ -76,6 +78,9 @@ public:
   */
   Data(const String&);
 
+  /*
+    文字列型の値をもつデータを構築します。
+  */
   Data(String&&);
 
   /*
@@ -89,7 +94,15 @@ public:
   */
   Data(const std::vector<Data>&);
 
+  /*
+    配列型の値を持つデータを構築します。
+  */
   Data(std::vector<Data>&&);
+
+  /*
+    配列型の値を持つデータを構築します。
+  */
+  Data(std::initializer_list<Data>);
 
   /*
     bool型の値を持つデータを構築します。
@@ -173,18 +186,30 @@ public:
   */
   Data& operator=(Data&&);
 
+  /*
+    データをシリアライズします。
+  */
   size_t serialize(uint8_t* buf, size_t off, size_t size) const {
     return _serialize(buf, off, size);
   }
 
+  /*
+    データをシリアライズします。
+  */
   size_t serialize(uint8_t* buf, size_t size) const {
     return serialize(buf, 0, size);
   }
 
+  /*
+    データをデシリアライズします。
+  */
   static bool deserialize(uint8_t* buf, size_t off, const size_t size, Data* const data_p) {
     return _deserialize(buf, off, size, data_p) == size;
   }
 
+  /*
+    データをデシリアライズします。
+  */
   static bool deserialize(uint8_t* buf, const size_t size, Data* const data_p) {
     return deserialize(buf, 0, size, data_p);
   }
