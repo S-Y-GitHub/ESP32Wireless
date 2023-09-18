@@ -10,7 +10,7 @@ PCではPythonまたはJavaを使用して通信を行うことができます�
 スケッチと同じディレクトリに Wireless.hpp, Wireless.cpp, Data.hpp, Data.cpp を配置してください。
 Wireless.hpp をインクルードすることで使用することができます。
 ```C++
-include "Wireless.hpp"
+#include "Wireless.hpp"
 ```
 
 ## Data
