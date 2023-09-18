@@ -102,7 +102,7 @@ void setup() {
 ```C++
 wlTxWrite("Hello");
 // wlTxWrite("Hello", 0);
-wlTxWrite(std::vector<Data>{"Hello", static_cast<uint8_t>(1), static_cast<int32_t>(2), static_cast<uint64_t>(3)});
+wlTxWrite({"Hello", static_cast<uint8_t>(1), static_cast<int32_t>(2), static_cast<uint64_t>(3)});
 // wlTxWrite(std::vector<Data>{"Hello", 1, 2, 3});
 wlTxWrite(static_cast<uint32_t>(0));
 // wlTxWrite(static_cast<uint32_t>(0), 0);
