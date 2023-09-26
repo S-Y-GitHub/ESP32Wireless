@@ -1,4 +1,3 @@
-#include <initializer_list>
 #include "Data.hpp"
 
 Data::Data(const String& str)
@@ -210,14 +209,14 @@ size_t Data::_serialize(uint8_t* buf, size_t& off, size_t size) const {
 }
 
 template<class IntType>
-static IntType deserialize_int(uint8_t* buf, size_t& off) {
+static IntType deserialize_int(const uint8_t* buf, size_t& off) {
   IntType val = 0;
   for (size_t i = 0; i < sizeof(IntType); ++i)
     val |= static_cast<IntType>(buf[off++]) << (i << 3);
   return val;
 }
 
-size_t Data::_deserialize(uint8_t* buf, size_t& off, const size_t size, Data* const data_p) {
+size_t Data::_deserialize(const uint8_t* buf, size_t& off, const size_t size, Data* const data_p) {
   if (off >= size) return false;
   switch (buf[off++]) {
     case TYPE_NULL:

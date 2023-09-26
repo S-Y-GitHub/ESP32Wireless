@@ -13,8 +13,8 @@
 
 #include "Data.hpp"
 
+// 送受信可能な最大バイト数
 static const constexpr uint16_t MAX_PACKET_SIZE = 1024;
-
 /*
   無線LANに接続します。
 */
@@ -28,18 +28,43 @@ bool wlAPBegin(const char* /* ssid */, const char* /* pasword */, IPAddress /* i
   無線LANを切断します。
 */
 bool wlDissconnect();
+
 /*
-  
+  IPアドレスとポート番号を送信チャンネルに接続します。
 */
 void wlTxAttach(IPAddress /* ip */, uint16_t /* port */, uint8_t /* channel */ = 0);
-void wlTxDetach(IPAddress /* ip */, uint16_t /* port */, uint8_t /* channel */ = 0);
-void wlTxDetach(IPAddress /* ip */, uint8_t /* channel */ = 0);
-void wlTxDetach(uint16_t /* port */, uint8_t /* channel */ = 0);
-void wlTxWrite(const Data* /* buffer */, size_t /* size */, uint8_t /* channel */ = 0);
-void wlTxWrite(const Data& /* data */, uint8_t /* channel */ = 0);
 
+/*
+  IPアドレスとポート番号を送信チャンネルから切り離します。
+*/
+void wlTxDetach(IPAddress /* ip */, uint16_t /* port */, uint8_t /* channel */ = 0);
+/*
+  IPアドレスが一致するすべてのポートを送信チャンネルから切り離します。
+*/
+void wlTxDetach(IPAddress /* ip */, uint8_t /* channel */ = 0);
+/*
+  ポート番号が一致するすべてのポートを送信チャンネルから切り離します。
+*/
+void wlTxDetach(uint16_t /* port */, uint8_t /* channel */ = 0);
+/*
+  送信チャンネルにすべてのデータを送信します。
+*/
+void wlTxWrite(const Data* /* buffer */, size_t /* size */, uint8_t /* channel */ = 0);
+/*
+  送信チャンネルにデータを送信します。
+*/
+void wlTxWrite(const Data& /* data */, uint8_t /* channel */ = 0);
+/*
+  受信チャンネルから取り出すことができるデータ数を取得します。
+*/
 size_t wlRxAvailable(uint8_t /* channel */ = 0);
+/*
+  ポートを受信チャンネルに接続します。
+*/
 void wlRxAttach(uint16_t /* port */, uint8_t /* channel */ = 0);
+/*
+  ポートを受信チャンネルから切り離します。
+*/
 void wlRxDetach(uint16_t /* port */, uint8_t /* channel */ = 0);
 /*
   チャンネルからデータを取り出します。

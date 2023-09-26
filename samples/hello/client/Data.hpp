@@ -65,7 +65,7 @@ private:
   } _data;
 
   size_t _serialize(uint8_t* /* buf */, size_t& /* off */, const size_t /* size */) const;
-  static size_t _deserialize(uint8_t* /* buf */, size_t& /* off */, const size_t /* size */, Data* const /* data_p */);
+  static size_t _deserialize(const uint8_t* /* buf */, size_t& /* off */, const size_t /* size */, Data* const /* data_p */);
 public:
   /*
     Nullを表すデータを構築します。
@@ -203,15 +203,15 @@ public:
   /*
     データをデシリアライズします。
   */
-  static bool deserialize(uint8_t* buf, size_t off, const size_t size, Data* const data_p) {
+  static bool deserialize(const uint8_t* buf, size_t off, const size_t size, Data* const data_p) {
     return _deserialize(buf, off, size, data_p) == size;
   }
 
   /*
     データをデシリアライズします。
   */
-  static bool deserialize(uint8_t* buf, const size_t size, Data* const data_p) {
-    return deserialize(buf, 0, size, data_p);
+  static bool deserialize(const uint8_t* buf, const size_t size, Data* const data_p) {
+    return deserialize(buf, 0, size, data_p) == size;
   }
 
   /*
