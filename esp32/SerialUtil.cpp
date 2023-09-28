@@ -108,7 +108,7 @@ size_t serialAvailable() {
   return s;
 }
 
-Data serialRead(uint8_t ch) {
+Data serialRead() {
   Data data;
   mutEnter();
   if (rx_buf.empty())
