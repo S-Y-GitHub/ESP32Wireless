@@ -203,15 +203,9 @@ public:
   /*
     データをデシリアライズします。
   */
-  static bool deserialize(const uint8_t* buf, size_t off, const size_t size, Data* const data_p) {
-    return _deserialize(buf, off, size, data_p) == size;
-  }
-
-  /*
-    データをデシリアライズします。
-  */
   static bool deserialize(const uint8_t* buf, const size_t size, Data* const data_p) {
-    return deserialize(buf, 0, size, data_p) == size;
+    size_t off = 0;
+    return _deserialize(buf, off, size, data_p) == size;
   }
 
   /*
