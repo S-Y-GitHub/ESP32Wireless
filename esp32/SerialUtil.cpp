@@ -45,6 +45,7 @@ static void serialReceiveTask(void*) {
     r = run_flag;
     if (r) packetSerial.update();
     mutExit();
+    delay(1);
   } while (r);
 }
 
