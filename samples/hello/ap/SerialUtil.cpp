@@ -45,6 +45,7 @@ static void serialReceiveTask(void*) {
     r = run_flag;
     if (r) packetSerial.update();
     mutExit();
+    delay(1);
   } while (r);
 }
 
@@ -108,7 +109,7 @@ size_t serialAvailable() {
   return s;
 }
 
-Data serialRead(uint8_t ch) {
+Data serialRead() {
   Data data;
   mutEnter();
   if (rx_buf.empty())
