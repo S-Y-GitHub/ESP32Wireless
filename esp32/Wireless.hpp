@@ -13,8 +13,6 @@
 
 #include "Data.hpp"
 
-// 送受信可能な最大バイト数
-static const constexpr uint16_t MAX_PACKET_SIZE = 1024;
 /*
   無線LANに接続します。
 */

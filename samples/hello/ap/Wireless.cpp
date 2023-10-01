@@ -1,5 +1,8 @@
 #include "Wireless.hpp"
 
+// 送受信可能な最大バイト数
+static const constexpr uint16_t MAX_PACKET_SIZE = 256;
+
 static AsyncUDP udp;
 
 bool wlConnect(const char *ssid, const char *password, IPAddress ip, IPAddress gateway, IPAddress subnet) {

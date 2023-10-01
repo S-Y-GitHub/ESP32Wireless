@@ -1,7 +1,7 @@
 #include "HardwareSerial.h"
 #include "SerialUtil.hpp"
 
-static const constexpr uint16_t MAX_PACKET_SIZE = 1024;          // 送受信可能な最大バイト数
+static const constexpr uint16_t MAX_PACKET_SIZE = 256;           // 送受信可能な最大バイト数
 static const constexpr uint32_t RECEIVE_TASK_STACK_SIZE = 4096;  // 受信タスクのスタックメモリサイズ
 static const constexpr UBaseType_t RECEIVE_TASK_PRIORITY = 5;    // 受信タスクの優先度
 static const constexpr BaseType_t RECEIVE_TASK_CORE = 1;         // 受信タスクを実行するコア
