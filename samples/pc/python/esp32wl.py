@@ -5,6 +5,7 @@ from socket import socket, AF_INET, SOCK_DGRAM
 from threading import Lock
 
 
+# データ型
 class DataType(Enum):
     NULL = auto()
     BOOL = auto()
@@ -146,12 +147,14 @@ class Data:
         elif self.__type is DataType.STRING:
             bs.append(TYPE_STRING)
             self.__data: str
-            bs += len(self.__data).to_bytes(2, byteorder="little", signed=False)
+            bs += len(self.__data).to_bytes(2,
+                                            byteorder="little", signed=False)
             bs += self.__data.encode()
         elif self.__type is DataType.ARRAY:
             bs.append(TYPE_ARRAY)
             self.__data: list
-            bs += len(self.__data).to_bytes(2, byteorder="little", signed=False)
+            bs += len(self.__data).to_bytes(2,
+                                            byteorder="little", signed=False)
             for d in self.__data:
                 bs += bytes(d)
         elif self.__type is DataType.INT8:
@@ -216,6 +219,9 @@ class Data:
         return self.data if self.__type is DataType.ARRAY else list()
 
 
+MAX_PACKET_SIZE: int = 256
+
+
 class Wireless:
     def __init__(self) -> None:
         self.__rx_flag: bool = False
@@ -244,7 +250,7 @@ class Wireless:
         s: socket = socket(AF_INET, SOCK_DGRAM)
         s.bind(("0.0.0.0", port))
         while self.__rx_flag:
-            b, _ = s.recvfrom(1024)
+            b, _ = s.recvfrom(MAX_PACKET_SIZE)
             data = Data.deserialize(b)
             with self.__lock:
                 if port in self.__rx_channels.keys():
